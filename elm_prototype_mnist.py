@@ -211,7 +211,6 @@ HtY = H_train.T @ y_train
 n_diag = 10000
 n_diag_values = np.arange(200, n_diag, 200)
 accuracies = []
-norms = []
 
 # convert HtH to an 'ab' diagonal matrix for banded solver
 HtH_ab = np.zeros((n_diag*2 + 1, HtH.shape[1]))
@@ -233,9 +232,6 @@ for i in n_diag_values:
     # compute accuracy
     acc = accuracy_score(np.argmax(y_val, axis=1), np.argmax(yh_val_banded, axis=1))
     accuracies.append(acc)
-    norms.append(e)
-
-    # print(f"n_diag: {n_diag}, accuracy: {acc}, {HtH_ab_copy.shape}")
 
 # plot accuracy vs n_diag
 fig, ax1 = plt.subplots()
@@ -259,3 +255,5 @@ plt.grid(True)
 plt.show()
 
 # %%
+# TODO: try Cholesky banded solver
+
